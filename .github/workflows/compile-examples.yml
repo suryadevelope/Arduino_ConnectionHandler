@@ -127,7 +127,7 @@ jobs:
           sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
           cli-compile-flags: '[--export-binaries]'
       - run: |
-          cd /tmp/arduino-sketch-
+          cd /home
           ls -a
           
 
