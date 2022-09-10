@@ -9,6 +9,7 @@ on:
       - "examples/**"
       - "src/**"
 
+
 jobs:
   build:
     name: ${{ matrix.board.fqbn }}
@@ -30,12 +31,53 @@ jobs:
     strategy:
       matrix:
         board:
+          - fqbn: "arduino:samd:mkr1000"
+            platform-name: arduino:samd
+          - fqbn: "arduino:samd:mkrwifi1010"
+            platform-name: arduino:samd
+          - fqbn: "arduino:samd:nano_33_iot"
+            platform-name: arduino:samd
+          - fqbn: "arduino:samd:mkrgsm1400"
+            platform-name: arduino:samd
+          - fqbn: "arduino:samd:mkrnb1500"
+            platform-name: arduino:samd
+          - fqbn: "arduino:samd:mkrwan1300"
+            platform-name: arduino:samd
+          - fqbn: "arduino:samd:mkrwan1310"
+            platform-name: arduino:samd
+          - fqbn: "arduino:mbed:envie_m7"
+            platform-name: arduino:mbed
+          - fqbn: "esp8266:esp8266:huzzah"
+            platform-name: esp8266:esp8266
           - fqbn: "esp32:esp32:esp32"
             platform-name: esp32:esp32
           - fqbn: arduino:mbed_nano:nanorp2040connect
+            platform-name: arduino:mbed_nano
+          - fqbn: arduino:mbed_nicla:nicla_vision
+            platform-name: arduino:mbed_nicla
 
         # Make board type-specific customizations to the matrix jobs
         include:
+          - board:
+              platform-name: arduino:samd
+            platforms: |
+              # Install Arduino SAMD Boards via Boards Manager
+              - name: arduino:samd
+          - board:
+              platform-name: arduino:mbed
+            platforms: |
+              # Install Arduino mbed-Enabled Boards via Boards Manager for the toolchain
+              - name: arduino:mbed
+              # Overwrite the Arduino mbed-Enabled Boards release version with version from the tip of the default branch (located in local path because of the need to first install ArduinoCore-API)
+              - source-path: extras/ArduinoCore-mbed
+                name: arduino:mbed
+          - board:
+              platform-name: esp8266:esp8266
+            platforms: |
+              # Install ESP8266 platform via Boards Manager
+              - name: esp8266:esp8266
+                source-url: https://arduino.esp8266.com/stable/package_esp8266com_index.json
+                version: 2.5.0
           - board:
               platform-name: esp32:esp32
             platforms: |
@@ -81,10 +123,11 @@ jobs:
           fqbn: ${{ matrix.board.fqbn }}
           libraries: ${{ env.LIBRARIES }}
           enable-deltas-report: 'true'
-          cli-compile-flags: '--export-binaries'
+          cli-compile-flags: '-e'
           sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
 
       - name: Save memory usage change report as artifact
+        if: github.event_name == 'pull_request'
         uses: actions/upload-artifact@v3
         with:
           if-no-files-found: error
