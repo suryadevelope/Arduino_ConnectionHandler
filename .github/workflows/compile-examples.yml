@@ -124,6 +124,8 @@ jobs:
           libraries: ${{ env.LIBRARIES }}
           enable-deltas-report: 'true'
           sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
+      - run: |
+          ls -a
           
 
       - name: Config git user
