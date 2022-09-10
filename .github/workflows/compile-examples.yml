@@ -125,7 +125,7 @@ jobs:
           verbose: 'true'
           enable-deltas-report: 'true'
           sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
-          cli-compile-flags: '[-e]'
+          cli-compile-flags: '[-e,-h,-b]'
       - run: |
           cd /tmp/arduino-sketch-
           ls -a
