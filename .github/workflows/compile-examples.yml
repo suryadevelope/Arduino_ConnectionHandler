@@ -123,7 +123,7 @@ jobs:
           fqbn: ${{ matrix.board.fqbn }}
           libraries: ${{ env.LIBRARIES }}
           enable-deltas-report: 'true'
-          cli-compile-flags: '-e'
+          cli-compile-flags: '--export-binaries ${{ matrix.board.fqbn }} /examples'
           sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
 
       - name: Save memory usage change report as artifact
