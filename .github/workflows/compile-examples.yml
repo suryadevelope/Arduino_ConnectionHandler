@@ -122,10 +122,10 @@ jobs:
           platforms: ${{ matrix.platforms }}
           fqbn: ${{ matrix.board.fqbn }}
           libraries: ${{ env.LIBRARIES }}
-          cli-compile-flags: '-e ${{ matrix.board.fqbn }} /home/runner/work/Arduino_ConnectionHandler/Arduino_ConnectionHandler/examples'
           verbose: 'true'
           enable-deltas-report: 'true'
           sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
+          cli-compile-flags: '-e ${{ matrix.board.fqbn }} /home/runner/work/Arduino_ConnectionHandler/Arduino_ConnectionHandler/examples'
       - run: |
           cd /home
           ls -a
