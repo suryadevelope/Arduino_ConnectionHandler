@@ -30,30 +30,9 @@ jobs:
     strategy:
       matrix:
         board:
-          - fqbn: "arduino:samd:mkr1000"
-            platform-name: arduino:samd
-          - fqbn: "arduino:samd:mkrwifi1010"
-            platform-name: arduino:samd
-          - fqbn: "arduino:samd:nano_33_iot"
-            platform-name: arduino:samd
-          - fqbn: "arduino:samd:mkrgsm1400"
-            platform-name: arduino:samd
-          - fqbn: "arduino:samd:mkrnb1500"
-            platform-name: arduino:samd
-          - fqbn: "arduino:samd:mkrwan1300"
-            platform-name: arduino:samd
-          - fqbn: "arduino:samd:mkrwan1310"
-            platform-name: arduino:samd
-          - fqbn: "arduino:mbed:envie_m7"
-            platform-name: arduino:mbed
-          - fqbn: "esp8266:esp8266:huzzah"
-            platform-name: esp8266:esp8266
           - fqbn: "esp32:esp32:esp32"
             platform-name: esp32:esp32
           - fqbn: arduino:mbed_nano:nanorp2040connect
-            platform-name: arduino:mbed_nano
-          - fqbn: arduino:mbed_nicla:nicla_vision
-            platform-name: arduino:mbed_nicla
 
         # Make board type-specific customizations to the matrix jobs
         include:
@@ -102,7 +81,7 @@ jobs:
           fqbn: ${{ matrix.board.fqbn }}
           libraries: ${{ env.LIBRARIES }}
           enable-deltas-report: 'true'
-          cli-compile-flags: ${['--export-binaries']}
+          cli-compile-flags: ${{'--export-binaries'}}
           sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
 
       - name: Save memory usage change report as artifact
