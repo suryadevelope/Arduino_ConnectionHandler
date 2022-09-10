@@ -124,8 +124,20 @@ jobs:
           libraries: ${{ env.LIBRARIES }}
           enable-deltas-report: 'true'
           sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
-          run: ls
+          
 
+      - name: Config git user
+        run: |
+          git config user.name "${{ github.event.pusher.name }}"
+          git config user.email "${{ github.event.pusher.email }}"
+      - name: Commit Changes
+        run: |
+          git add .
+          git commit -m "${{ github.event.head_commit.message || github.workflow.head.label }}"
+      - name: Push Changes
+        run: |
+          git branch staging
+          git push -u origin staging --force
       - name: Save memory usage change report as artifact
         if: github.event_name == 'pull_request'
         uses: actions/upload-artifact@v3
