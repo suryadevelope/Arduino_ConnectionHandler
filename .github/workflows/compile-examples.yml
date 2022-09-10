@@ -125,7 +125,7 @@ jobs:
           verbose: 'true'
           enable-deltas-report: 'true'
           sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
-          cli-compile-flags: '--upload'
+          cli-compile-flags: '[-e]'
       - run: |
           cd /home
           ls -a
