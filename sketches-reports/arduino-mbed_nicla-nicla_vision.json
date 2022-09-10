@@ -1,0 +1,79 @@
+{
+  "commit_hash": "89257aca6b21281bc7b9b1d1900e63c7f7de415d",
+  "commit_url": "https://github.com/suryadevelope/Arduino_ConnectionHandler/commit/89257aca6b21281bc7b9b1d1900e63c7f7de415d",
+  "boards": [
+    {
+      "board": "arduino:mbed_nicla:nicla_vision",
+      "sketches": [
+        {
+          "name": "examples/ConnectionHandlerDemo",
+          "compilation_success": true,
+          "sizes": [
+            {
+              "name": "flash",
+              "maximum": 1966080,
+              "current": {
+                "absolute": 101928,
+                "relative": 5.18
+              },
+              "previous": {
+                "absolute": 101928,
+                "relative": 5.18
+              },
+              "delta": {
+                "absolute": 0,
+                "relative": 0.0
+              }
+            },
+            {
+              "name": "RAM for global variables",
+              "maximum": 523624,
+              "current": {
+                "absolute": 49192,
+                "relative": 9.39
+              },
+              "previous": {
+                "absolute": 49192,
+                "relative": 9.39
+              },
+              "delta": {
+                "absolute": 0,
+                "relative": 0.0
+              }
+            }
+          ]
+        }
+      ],
+      "sizes": [
+        {
+          "name": "flash",
+          "maximum": 1966080,
+          "delta": {
+            "absolute": {
+              "minimum": 0,
+              "maximum": 0
+            },
+            "relative": {
+              "minimum": 0.0,
+              "maximum": 0.0
+            }
+          }
+        },
+        {
+          "name": "RAM for global variables",
+          "maximum": 523624,
+          "delta": {
+            "absolute": {
+              "minimum": 0,
+              "maximum": 0
+            },
+            "relative": {
+              "minimum": 0.0,
+              "maximum": 0.0
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
