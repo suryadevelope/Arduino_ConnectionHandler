@@ -2,23 +2,12 @@ name: Compile Examples
 
 
 on:
-  pull_request:
-    paths:
-      - ".github/workflows/compile-examples.yml"
-      - "library.properties"
-      - "examples/**"
-      - "src/**"
   push:
     paths:
       - ".github/workflows/compile-examples.yml"
       - "library.properties"
       - "examples/**"
       - "src/**"
-  schedule:
-    # Run every Tuesday at 8 AM UTC to catch breakage caused by changes to external resources (libraries, platforms).
-    - cron: "0 8 * * TUE"
-  workflow_dispatch:
-  repository_dispatch:
 
 jobs:
   build:
@@ -69,26 +58,6 @@ jobs:
         # Make board type-specific customizations to the matrix jobs
         include:
           - board:
-              platform-name: arduino:samd
-            platforms: |
-              # Install Arduino SAMD Boards via Boards Manager
-              - name: arduino:samd
-          - board:
-              platform-name: arduino:mbed
-            platforms: |
-              # Install Arduino mbed-Enabled Boards via Boards Manager for the toolchain
-              - name: arduino:mbed
-              # Overwrite the Arduino mbed-Enabled Boards release version with version from the tip of the default branch (located in local path because of the need to first install ArduinoCore-API)
-              - source-path: extras/ArduinoCore-mbed
-                name: arduino:mbed
-          - board:
-              platform-name: esp8266:esp8266
-            platforms: |
-              # Install ESP8266 platform via Boards Manager
-              - name: esp8266:esp8266
-                source-url: https://arduino.esp8266.com/stable/package_esp8266com_index.json
-                version: 2.5.0
-          - board:
               platform-name: esp32:esp32
             platforms: |
               # Install ESP32 platform via Boards Manager
@@ -133,7 +102,7 @@ jobs:
           fqbn: ${{ matrix.board.fqbn }}
           libraries: ${{ env.LIBRARIES }}
           enable-deltas-report: 'true'
-          cli-compile-flags: '--export-binaries '
+          cli-compile-flags: ${['--export-binaries']}
           sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
 
       - name: Save memory usage change report as artifact
